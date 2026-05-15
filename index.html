@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Invitación de Cumpleaños</title>
+    <title>¡Cristofer al Infinito y Más Allá!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Bungee&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --color-sobre: #ff6b6b;
-            --color-papel: #ffffff;
-            --color-texto: #444;
+            --woody-yellow: #f9d423;
+            --woody-red: #d32f2f;
+            --buzz-green: #7cfc00;
+            --sky-blue: #40a4ff;
+            --clouds: #ffffff;
         }
 
         body {
@@ -17,138 +21,201 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f7d794;
-            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            /* Fondo de Nubes de Andy */
+            background-color: var(--sky-blue);
+            background-image: radial-gradient(var(--clouds) 20%, transparent 20%),
+                              radial-gradient(var(--clouds) 20%, transparent 20%);
+            background-position: 0 0, 50px 50px;
+            background-size: 100px 100px;
         }
 
-        /* Contenedor del sobre */
         .envelope-wrapper {
             position: relative;
             cursor: pointer;
+            perspective: 1000px;
         }
 
+        /* El Sobre */
         .envelope {
             position: relative;
-            width: 300px;
-            height: 200px;
-            background-color: var(--color-sobre);
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: 350px;
+            height: 230px;
+            background-color: var(--woody-yellow);
+            /* Patrón de camisa de Woody */
+            background-image: linear-gradient(0deg, transparent 24%, rgba(211, 47, 47, .2) 25%, rgba(211, 47, 47, .2) 26%, transparent 27%, transparent 74%, rgba(211, 47, 47, .2) 75%, rgba(211, 47, 47, .2) 76%, transparent 77%, transparent),
+                              linear-gradient(90deg, transparent 24%, rgba(211, 47, 47, .2) 25%, rgba(211, 47, 47, .2) 26%, transparent 27%, transparent 74%, rgba(211, 47, 47, .2) 75%, rgba(211, 47, 47, .2) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        /* La solapa del sobre */
+        /* Solapa con la estrella de Sheriff */
         .envelope::before {
-            content: "";
+            content: "★";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #ffd700;
+            text-shadow: 2px 2px #b8860b;
             position: absolute;
             top: 0;
-            z-index: 2;
-            border-top: 110px solid var(--color-sobre);
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            border-top: 120px solid #e6b800;
+            border-left: 175px solid transparent;
+            border-right: 175px solid transparent;
             transform-origin: top;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
+            box-sizing: border-box;
+            padding-top: -120px;
         }
 
-        /* Los costados del sobre */
         .envelope::after {
             content: "";
             position: absolute;
-            z-index: 1;
-            border-left: 150px solid #ff8787;
-            border-bottom: 100px solid #ff8787;
-            border-right: 150px solid #ff8787;
-            border-top: 100px solid transparent;
+            z-index: 2;
+            border-left: 175px solid rgba(249, 212, 35, 0.9);
+            border-bottom: 115px solid rgba(249, 212, 35, 1);
+            border-right: 175px solid rgba(249, 212, 35, 0.9);
+            border-top: 115px solid transparent;
             bottom: 0;
         }
 
-        /* La carta (invitación) */
+        /* Carta de Invitación */
         .card {
             position: absolute;
             bottom: 10px;
-            left: 10px;
-            width: 280px;
-            height: 180px;
-            background: var(--color-papel);
-            z-index: 0;
-            transition: transform 0.5s ease, z-index 0s 0.5s;
-            padding: 20px;
+            left: 15px;
+            width: 320px;
+            height: 280px;
+            background: white;
+            z-index: 1;
+            transition: transform 0.8s ease, z-index 0s 0.4s;
+            padding: 15px;
             box-sizing: border-box;
             text-align: center;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border: 5px solid var(--buzz-green);
+            border-radius: 10px;
         }
 
-        .card img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
+        .card h1 {
+            font-family: 'Luckiest Guy', cursive;
+            color: #0046ad;
             margin: 5px 0;
-            border: 2px solid var(--color-sobre);
+            font-size: 1.8em;
+            -webkit-text-stroke: 1px #f9d423;
         }
 
-        .card h2 { margin: 5px 0; color: var(--color-sobre); font-size: 1.2em; }
-        .card p { font-size: 0.8em; margin: 5px 0; color: var(--color-texto); }
+        .card h2 {
+            font-family: 'Bungee', cursive;
+            color: var(--woody-red);
+            margin: 0;
+            font-size: 1.2em;
+        }
 
-        .btn-mapa {
+        .card .photo-frame {
+            width: 90px;
+            height: 90px;
+            margin: 10px auto;
+            border: 4px solid #555;
+            border-radius: 5px;
+            background: #eee;
+            overflow: hidden;
+            transform: rotate(-3deg);
+        }
+
+        .card .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info {
+            font-size: 0.9em;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .btn-maps {
             display: inline-block;
-            margin-top: 10px;
-            padding: 8px 12px;
             background: #4ecdc4;
             color: white;
             text-decoration: none;
-            border-radius: 20px;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-family: 'Bungee', sans-serif;
             font-size: 0.7em;
-            font-weight: bold;
+            transition: 0.3s;
+            border: 2px solid #333;
         }
 
-        /* Animación al abrir */
+        .btn-maps:hover { background: var(--buzz-green); color: black; }
+
+        /* Estados abiertos */
         .envelope-wrapper.open .envelope::before {
             transform: rotateX(180deg);
             z-index: 0;
         }
 
         .envelope-wrapper.open .card {
-            transform: translateY(-120px);
-            z-index: 3;
+            transform: translateY(-180px) scale(1.1);
+            z-index: 5;
         }
 
-        .instruccion {
+        .tap-hint {
             position: absolute;
-            bottom: -40px;
+            bottom: -50px;
             width: 100%;
             text-align: center;
-            color: #666;
-            font-weight: bold;
+            font-family: 'Bungee', sans-serif;
+            color: white;
+            text-shadow: 2px 2px 0px #000;
         }
     </style>
 </head>
 <body>
 
-    <div class="envelope-wrapper" onclick="abrirSobre()">
+    <div class="envelope-wrapper" onclick="toggleEnvelope()">
         <div class="envelope">
             <div class="card">
-                <h2>¡Mis 18 años!</h2>
-                <p>Estás invitado a la fiesta de:</p>
-                <strong>Cristofer</strong>
-                <br>
-                <img src="imagen1.jpg" alt="Foto del cumpleañero">
-                <p>Fecha: 05 de junio - 17:00h</p>
-                
-                <a href="https://maps.app.goo.gl/PXgDw4jHBCg1jF736" target="_blank" class="btn-mapa">
-                    📍 Ver Ubicación
+                <h1>YOU'RE INVITED!</h1>
+                <h2>CRISTOFER</h2>
+                <div class="photo-frame">
+                    <img src="imagen1.jpg" alt="Cristofer">
+                </div>
+                <div class="info">
+                    <strong>¡MIS 18 AÑOS!</strong><br>
+                    🗓 05 de Junio | 🕔 5:00 PM<br>
+                    📍 Quinta La Paloma
+                </div>
+                <a href="https://maps.app.goo.gl/MfpUobb2VyN2RtcT9" target="_blank" class="btn-maps" onclick="event.stopPropagation();">
+                    VER MAPA 🚀
                 </a>
             </div>
         </div>
-        <div class="instruccion">¡Haz clic para abrir! 👆</div>
+        <div class="tap-hint">¡TOCA PARA ABRIR!</div>
     </div>
 
     <script>
-        function abrirSobre() {
-            document.querySelector('.envelope-wrapper').classList.toggle('open');
+        function toggleEnvelope() {
+            const wrapper = document.querySelector('.envelope-wrapper');
+            const isOpen = wrapper.classList.toggle('open');
+            
+            if(isOpen) {
+                // Efecto de confeti al abrir
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#f9d423', '#d32f2f', '#7cfc00', '#40a4ff']
+                });
+            }
         }
     </script>
-
 </body>
 </html>
