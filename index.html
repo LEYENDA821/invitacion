@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Invitación de Cumpleaños</title>
+    <style>
+        :root {
+            --color-sobre: #ff6b6b;
+            --color-papel: #ffffff;
+            --color-texto: #444;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7d794;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Contenedor del sobre */
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: var(--color-sobre);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* La solapa del sobre */
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            border-top: 110px solid var(--color-sobre);
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        /* Los costados del sobre */
+        .envelope::after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            border-left: 150px solid #ff8787;
+            border-bottom: 100px solid #ff8787;
+            border-right: 150px solid #ff8787;
+            border-top: 100px solid transparent;
+            bottom: 0;
+        }
+
+        /* La carta (invitación) */
+        .card {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 280px;
+            height: 180px;
+            background: var(--color-papel);
+            z-index: 0;
+            transition: transform 0.5s ease, z-index 0s 0.5s;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 5px 0;
+            border: 2px solid var(--color-sobre);
+        }
+
+        .card h2 { margin: 5px 0; color: var(--color-sobre); font-size: 1.2em; }
+        .card p { font-size: 0.8em; margin: 5px 0; color: var(--color-texto); }
+
+        .btn-mapa {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #4ecdc4;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        /* Animación al abrir */
+        .envelope-wrapper.open .envelope::before {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .envelope-wrapper.open .card {
+            transform: translateY(-120px);
+            z-index: 3;
+        }
+
+        .instruccion {
+            position: absolute;
+            bottom: -40px;
+            width: 100%;
+            text-align: center;
+            color: #666;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-wrapper" onclick="abrirSobre()">
+        <div class="envelope">
+            <div class="card">
+                <h2>¡Mis 25 Años!</h2>
+                <p>Estás invitado a la fiesta de:</p>
+                <strong>Juan Pérez</strong>
+                <br>
+                <img src="https://via.placeholder.com/150" alt="Foto del cumpleañero">
+                <p>Fecha: 25 de Octubre - 20:00h</p>
